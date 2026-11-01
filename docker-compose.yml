@@ -1,0 +1,24 @@
+services:
+  api:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      MARKETSTREAM_Q_ENABLED: "false"
+      MARKETSTREAM_DATA_DIR: /data
+    volumes:
+      - marketstream-data:/data
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    depends_on:
+      - api
+
+volumes:
+  marketstream-data:

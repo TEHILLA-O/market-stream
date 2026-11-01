@@ -1,0 +1,30 @@
+[project]
+name = "marketstream"
+version = "1.0.0"
+description = "Simulated real-time market data, order-book reconstruction, and paper trading."
+requires-python = ">=3.11"
+dependencies = [
+  "fastapi>=0.115",
+  "uvicorn[standard]>=0.32",
+  "pydantic>=2.10",
+  "pydantic-settings>=2.6",
+  "structlog>=24.4",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.3", "httpx>=0.27"]
+q = ["pykx"]
+
+[project.scripts]
+marketstream = "marketstream.main:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["marketstream*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
